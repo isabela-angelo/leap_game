@@ -8,6 +8,7 @@ public class CubeInteraction : MonoBehaviour
 {
 	public AudioClip dindon;
 	private AudioSource source;
+	private int time = 0;
 	private bool flag_right = true;
 	private bool flag_left = true;
 	Controller controller;
@@ -22,13 +23,11 @@ public class CubeInteraction : MonoBehaviour
 			return "left";
 		}
 		return "error";
-	}
-					
-		
-
+	}	
 
 	void OnTriggerEnter (Collider col)
-	{			
+	{	
+		time = 1;
 		//Debug.Log ("+"+col.gameObject.name+"+");
 		if (col.gameObject.name.Equals("bone3")) {
 			source = GetComponent<AudioSource> ();
@@ -48,12 +47,22 @@ public class CubeInteraction : MonoBehaviour
 		}
 	}
 	void OnTriggerExit (Collider col) {
+		time = 0;
 		if (col.gameObject.name.Equals("bone3")) {
 			if (whichHand (col.gameObject).Equals ("right")) {				
 				flag_right = true;
 			} else if (whichHand (col.gameObject).Equals ("left")) {				
 				flag_left = true;
 			}
+		}
+	}
+
+	// PARA PORTA!! - muda de room depois de um tempo esperando com a mão na porta (colocar som!)
+	void Update () {
+		time++;
+		if (time > 100) {
+			time = 0;
+			//Application.LoadLevel("NOME_LUGAR");
 		}
 	}
 }

@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LeapMotion\Scripts\GAME\HandsInteraction.cs">
     <Files>
-      <File FileName="Assets\LeapMotion\Scripts\GAME\CubeInteraction.cs" Line="46" Column="36" />
-      <File FileName="Assets\LeapMotion\Scripts\GAME\HandsInteraction.cs" Line="47" Column="21" />
+      <File FileName="Assets\LeapMotion\Scripts\GAME\CubeInteraction.cs" Line="65" Column="42" />
+      <File FileName="Assets\LeapMotion\Scripts\GAME\HandsInteraction.cs" Line="49" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

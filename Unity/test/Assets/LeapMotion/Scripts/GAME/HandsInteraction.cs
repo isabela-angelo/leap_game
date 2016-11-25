@@ -5,12 +5,12 @@ using Leap;
 public class HandsInteraction : MonoBehaviour {
 
 	Controller controller;
-	bool flag_right = true;
-	bool flag_left = true;
+	int cont_right = 0;
+	int cont_left = 0;
 
 	bool grabbing (Hand hand) {
 		//Debug.Log ("+"+hand.GrabStrength+"+");
-		if (hand.GrabStrength > 0.5){
+		if (hand.GrabStrength >=0.9f){
 			return true;
 		}
 		return false;
@@ -29,28 +29,62 @@ public class HandsInteraction : MonoBehaviour {
 		bool right = false;
 		foreach (Hand hand in frame.Hands) {
 			if (grabbing(hand)) {
-				if (flag_left && hand.IsLeft) {
+				if (hand.IsLeft) {
 					//Debug.Log ("left");
 					left = true;
-					flag_left = false;
-				} else {
-					flag_left = true;
+
 				}
-				if (flag_right && hand.IsRight) {
+				if (hand.IsRight) {
 					//Debug.Log ("right");
 					right = true;
-					flag_right = false;
-				} else {
-					flag_right = true;
-				}
+				} 
 			}
+
 			if (right && left) {
-				Debug.Log ("mapa!");
+				if (cont_left < cont_right) {
+					cont_left = cont_right;
+				}
+				cont_left++;
+				cont_right++;
 			} else if (right) {
-				Debug.Log ("vira direita!");				
+				cont_right++;
+				Debug.Log ("+"+hand.GrabStrength+"+right");
+				cont_left = 0;
 			} else if (left) {
-				Debug.Log ("vira esquerda!");				
-			}				
+				cont_left++;
+				Debug.Log ("+"+hand.GrabStrength+"+left");
+				cont_right = 0;
+
+			} else {
+				cont_left = 0;
+				cont_right = 0;
+			}
+		}
+		//Debug.Log ("right" + cont_right);
+		//Debug.Log ("left" + cont_left);
+		if (cont_left == 200 && cont_right == 200) {
+			Debug.Log ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!mapa");
+			//Application.LoadLevel("MAPA_LUGAR");
+			cont_left = 0;
+			cont_right = 0;
+
+		}
+
+		else if (cont_left == 300){
+			Debug.Log ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!virar left");
+			GameObject obj = GameObject.Find("Camera");
+			obj.transform.Rotate(0, 90, 0);
+			cont_left = 0;
+			cont_right = 0;
+
+		}
+		else if (cont_right == 300){
+			Debug.Log ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!virar right");
+			GameObject obj = GameObject.Find("Camera");
+			obj.transform.Rotate(0, -90, 0);
+			cont_left = 0;
+			cont_right = 0;
+
 		}
 	}
 }
