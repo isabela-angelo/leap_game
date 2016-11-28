@@ -59,10 +59,17 @@ public class CubeInteraction : MonoBehaviour
 
 	// PARA PORTA!! - muda de room depois de um tempo esperando com a mão na porta (colocar som!)
 	void Update () {
-		time++;
-		if (time > 100) {
+		if (!flag_left || !flag_right) {
+			time++;
+			if (time > 180) {
+				time = 0;
+				Debug.Log ("muda de room");
+				string next_room = this.gameObject.name.Replace("Interaction", "");
+				Debug.Log (next_room);
+				//Application.LoadLevel("NOME_LUGAR");
+			}
+		} else {
 			time = 0;
-			//Application.LoadLevel("NOME_LUGAR");
 		}
 	}
 }
